@@ -3,6 +3,7 @@ package com.edu.cnu.poker;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Deck {
                 }
             }
         }
+        Collections.shuffle(cardList);
     }
 
     public int getTotalCard() {
