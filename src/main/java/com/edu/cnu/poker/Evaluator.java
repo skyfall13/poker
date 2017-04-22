@@ -1,5 +1,6 @@
 package com.edu.cnu.poker;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,19 @@ public class Evaluator {
                 return "TRIPLE";
             }
         }
+
+        Collections.sort(cardList);
+
+        for(int i = 0; i < cardList.size() ; i++ ) {
+            if(i == cardList.size() -1 ){
+
+                return "STRAIGHT" ;
+            }
+            if(cardList.get(i).compareTo(cardList.get(i+1)) != -1 ){
+                break;
+            }
+        }
+
         return "NOTHING";
     }
 }
