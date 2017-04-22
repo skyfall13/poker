@@ -26,4 +26,47 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("FLUSH"));
     }
+
+    @Test
+    public void RANK가_5개가_동일하면_스트레이트(){
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3,Suit.CLUBS),
+                new Card(4,Suit.DIAMONDS),
+                new Card(5,Suit.CLUBS),
+                new Card(6,Suit.SPADES),
+                new Card(7,Suit.DIAMONDS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("STRAIGHT"));
+    }
+
+    @Test
+    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플래시(){
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3,Suit.SPADES),
+                new Card(4,Suit.SPADES),
+                new Card(5,Suit.SPADES),
+                new Card(6,Suit.SPADES),
+                new Card(7,Suit.SPADES)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("STRAIGHTFLUSH"));
+    }
+
+    @Test
+    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플래시(){
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3,Suit.SPADES),
+                new Card(4,Suit.SPADES),
+                new Card(5,Suit.SPADES),
+                new Card(6,Suit.SPADES),
+                new Card(7,Suit.SPADES)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("STRAIGHTFLUSH"));
+    }
+
 }
