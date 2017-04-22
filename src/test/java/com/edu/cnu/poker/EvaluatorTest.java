@@ -80,7 +80,7 @@ public class EvaluatorTest {
         assertThat(result, is("FULL_HOUSE"));
     }
     @Test
-    public void RANK가_5개가_동일하면_스트레이트(){
+    public void RANK가_5개가_연속하면서_스트레이트(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(3,Suit.CLUBS),
@@ -94,7 +94,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플러쉬(){
+    public void RANK가_5개가_연속하면서_문양이_같은_스트레이트플러쉬(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(3,Suit.SPADES),
@@ -108,7 +108,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void RANK가_5개가_동일하면서_모양_스페이스_로얄스트레이트플러쉬(){
+    public void RANK가_5개가_연속하면서_모양_스페이스_로얄스트레이트플러쉬(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(10,Suit.SPADES),
