@@ -104,7 +104,7 @@ public class EvaluatorTest {
                 new Card(7,Suit.SPADES)
         );
         String result = evaluator.evaluate(cardList);
-        assertThat(result, is("STRAIGHTFLUSH"));
+        assertThat(result, is("STRAIGHT_FLUSH"));
     }
 
     @Test
@@ -118,6 +118,6 @@ public class EvaluatorTest {
                 new Card(1,Suit.SPADES)
         );
         String result = evaluator.evaluate(cardList);
-        assertThat(result, is("STRAIGHTFLUSH"));
+        assertThat(result, is("ROYAL_STRAIGHT_FLUSH"));
     }
 }
