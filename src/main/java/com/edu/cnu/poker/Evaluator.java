@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public class Evaluator {
     public String evaluate(List<Card> cardList) {
+
+        boolean flush_flag=false;
         Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
         Map<Integer, Integer> tempMap2 = new HashMap<Integer, Integer>();
 
@@ -25,7 +27,7 @@ public class Evaluator {
 
         for (Suit key : tempMap.keySet()) {
             if (tempMap.get(key) == 5) {
-                return "FLUSH";
+                flush_flag = true;
             }
         }
         for (Card card : cardList) {
@@ -59,14 +61,18 @@ public class Evaluator {
 
         for(int i = 0; i < cardList.size() ; i++ ) {
             if(i == cardList.size() -1 ){
-
+                if(flush_flag){
+                    return "STRAIGHT_FLUSH";
+                }
                 return "STRAIGHT" ;
             }
             if(cardList.get(i).compareTo(cardList.get(i+1)) != -1 ){
                 break;
             }
         }
-
+        if(flush_flag){
+            return "FLUSH";
+        }
         return "NOTHING";
     }
 }
