@@ -26,4 +26,17 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("FLUSH"));
     }
+    @Test
+    public void rank3개가_동일하면_트리플이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3, Suit.CLUBS),
+                new Card(3, Suit.DIAMONDS),
+                new Card(3, Suit.SPADES),
+                new Card(4, Suit.CLUBS),
+                new Card(5, Suit.CLUBS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("TRIPLE"));
+    }
 }
