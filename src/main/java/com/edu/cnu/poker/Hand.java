@@ -1,6 +1,7 @@
 package com.edu.cnu.poker;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,5 +24,18 @@ public class Hand {
 
     public int getTotalCard() {
         return cardList.size();
+    }
+
+    public List<Card> getMyCardList(){
+        return this.cardList;
+    }
+
+    public void showMyCardList(){
+        Iterator<Card> tempCardList = cardList.iterator();
+        while (tempCardList.hasNext()){
+            Card tempCard = tempCardList.next();
+            System.out.print("[모양 : " + tempCard.getSuit() +" 숫자 : " + tempCard.getRank() + ']');
+        }
+        System.out.println();
     }
 }
