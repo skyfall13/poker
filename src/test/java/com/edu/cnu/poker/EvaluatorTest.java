@@ -28,6 +28,7 @@ public class EvaluatorTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void RANK가_2개가_동일한게_하나있으면_원페어다(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
@@ -80,6 +81,8 @@ public class EvaluatorTest {
         assertThat(result, is("FULL_HOUSE"));
     }
     @Test
+=======
+>>>>>>> b562fb2938a2142739eb44d4134ddb1ff1311f49
     public void RANK가_5개가_동일하면_스트레이트(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
@@ -120,4 +123,8 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("STRAIGHTFLUSH"));
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b562fb2938a2142739eb44d4134ddb1ff1311f49
 }
