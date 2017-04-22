@@ -52,4 +52,31 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("TRIPLE"));
     }
+
+    @Test
+    public void rank3개가_동일하면서_2개가_동일하면_풀하우스이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3, Suit.CLUBS),
+                new Card(3, Suit.DIAMONDS),
+                new Card(3, Suit.SPADES),
+                new Card(2, Suit.CLUBS),
+                new Card(2, Suit.DIAMONDS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("FULLHOUSE"));
+    }
+    @Test
+    public void rank2개가_동일한_카드쌍이_두개이면_투페어이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3, Suit.CLUBS),
+                new Card(3, Suit.DIAMONDS),
+                new Card(7, Suit.SPADES),
+                new Card(2, Suit.CLUBS),
+                new Card(2, Suit.DIAMONDS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("TOWPAIR"));
+    }
 }

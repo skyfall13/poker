@@ -41,6 +41,11 @@ public class Evaluator {
             if (tempMap2.get(key) == 4) {
                 return "FOURCARD";
             }else if (tempMap2.get(key) == 3) {
+                for(Integer key2 : tempMap2.keySet()) {
+                    if(tempMap2.get(key2) == 2) {
+                        return "FULLHOUSE";
+                    }
+                }
                 return "TRIPLE";
             }
         }
