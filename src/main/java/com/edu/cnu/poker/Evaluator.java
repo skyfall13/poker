@@ -38,20 +38,23 @@ public class Evaluator {
                 return "FLUSH";
             }
         }
-        int pairCount = 0;
         boolean triple = false;
+        for (int key : tempMap2.keySet()) {
+            if (tempMap2.get(key) == 3) {
+                triple = true;
+            }
+        }
+        int pairCount = 0;
         for (int key : tempMap2.keySet()) {
             if (tempMap2.get(key) == 4)
                 return "FOUR_CARD";
-            if (tempMap2.get(key) == 3) {
-                triple = true;
-                return "TRIPLE";
-            }
             if (tempMap2.get(key) == 2) {
                 if (triple)
                     return "FULL_HOUSE";
                 pairCount++;
             }
+        if (triple)
+            return "TRIPLE";
         }
         switch (pairCount) {
             case 0:
