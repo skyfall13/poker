@@ -42,7 +42,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플래시(){
+    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플러쉬(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(3,Suit.SPADES),
@@ -56,14 +56,14 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void RANK가_5개가_동일하면서_문양이_같은_스트레이트플래시(){
+    public void RANK가_5개가_동일하면서_모양_스페이스_로얄스트레이트플러쉬(){
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
-                new Card(3,Suit.SPADES),
-                new Card(4,Suit.SPADES),
-                new Card(5,Suit.SPADES),
-                new Card(6,Suit.SPADES),
-                new Card(7,Suit.SPADES)
+                new Card(10,Suit.SPADES),
+                new Card(11,Suit.SPADES),
+                new Card(12,Suit.SPADES),
+                new Card(13,Suit.SPADES),
+                new Card(1,Suit.SPADES)
         );
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("STRAIGHTFLUSH"));
