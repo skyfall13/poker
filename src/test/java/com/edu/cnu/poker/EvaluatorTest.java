@@ -79,4 +79,17 @@ public class EvaluatorTest {
         String result = evaluator.evaluate(cardList);
         assertThat(result, is("TOWPAIR"));
     }
+    @Test
+    public void rank2개가_동일하면_원페어이다() {
+        Evaluator evaluator = new Evaluator();
+        List<Card> cardList = Arrays.asList(
+                new Card(3, Suit.CLUBS),
+                new Card(3, Suit.DIAMONDS),
+                new Card(7, Suit.SPADES),
+                new Card(2, Suit.CLUBS),
+                new Card(5, Suit.DIAMONDS)
+        );
+        String result = evaluator.evaluate(cardList);
+        assertThat(result, is("ONEPAIR"));
+    }
 }
