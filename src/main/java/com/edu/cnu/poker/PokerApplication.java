@@ -46,7 +46,7 @@ public class PokerApplication {
         System.out.println(yourResult.getPriority());
 
         if(!this.compareTo(myResult, yourResult)) {
-            
+            // 모든 족보를 검사한 후, 남은 카드 TOP검사로 승리패배판단 미구현
         }
     }
 
