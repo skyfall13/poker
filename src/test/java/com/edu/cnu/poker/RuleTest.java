@@ -17,4 +17,12 @@ public class RuleTest {
 
         assertThat(result, is(-1));
     }
+    @Test
+    public void 족보가같고_퍼스트랭크가다른_두Rule을비교(){
+        Rule myRule = new Rule(EnumRule.FLUSH, 13);
+        Rule yourRule = new Rule(EnumRule.FLUSH, 12);
+        int result = myRule.compareTo(yourRule);
+
+        assertThat(result, is(1));
+    }
 }
