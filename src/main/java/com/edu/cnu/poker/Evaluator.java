@@ -54,9 +54,7 @@ public class Evaluator {
                 triple = true;
             }
         }
-        for (int key : tempMap2.keySet()){
-            System.out.println(tempMap2.get(key));
-        }
+
         int pairCount = 0;
         for (int key : tempMap2.keySet()) {
             if (tempMap2.get(key) == 4) {

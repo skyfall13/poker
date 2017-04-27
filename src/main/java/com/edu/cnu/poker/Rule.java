@@ -54,7 +54,9 @@ public class Rule {
         this.second = second;
     }
 
-    public void setSuit(Suit suit) { this.suit = suit; }
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
 
 
     public int compareTo(Rule otherRule) {
@@ -62,7 +64,7 @@ public class Rule {
             return 1;
         } else if (this.getPriority().compareTo(otherRule.getPriority()) < 0) {
             return -1;
-        }else {     // 족보가 같을 때
+        } else {     // 족보가 같을 때
             if (this.getFirst() - otherRule.getFirst() > 0) {
                 if (otherRule.getFirst() == 1) {
                     return -1;
@@ -79,9 +81,16 @@ public class Rule {
                 } else if (this.getSecond() - otherRule.getSecond() < 0) {
                     return -1;
                 } else {
-                    return this.getSuit().compareTo(otherRule.getSuit());
+                    if (this.getSuit() == null)
+                        return 0;
+                    else if (this.getSuit().ordinal() > otherRule.getSuit().ordinal())
+                        return 1;
+                    else
+                        return -1;
                 }
+
             }
         }
     }
+
 }
