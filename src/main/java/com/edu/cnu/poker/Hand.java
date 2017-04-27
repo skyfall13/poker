@@ -12,6 +12,7 @@ public class Hand {
     private Deck deck;
     private PokerType pokerType;
     private List<Card> cardList;
+    private int removeCount = 2;
 
     public Hand(Deck deck, PokerType pokerType) {
         this.deck = deck;
@@ -20,6 +21,17 @@ public class Hand {
         for (int i = 0; i < pokerType.getNumberOfCard(); i++) {
             cardList.add(deck.drawCard());
         }
+    }
+
+    public boolean removeCard(int num){
+        if(removeCount != 0) {
+            cardList.remove(num - 1);
+            removeCount--;
+            if(removeCount == 0)
+                return false;
+            return true;
+        }
+        return false;
     }
 
     public int getTotalCard() {
