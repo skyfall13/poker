@@ -27,8 +27,12 @@ public class PokerApplication {
         while(true){
             System.out.println("버리고 싶은 카드를 입력해주세요 (앞에서 부터 1번카드)");
             int input = scan.nextInt();
-            if(!player1.getHand().removeCard(input)) {
-                break;
+            try {
+                if (!player1.getHand().removeCard(input)) {
+                    break;
+                }
+            } catch (Exception e){
+                continue;
             }
             player1.getHand().showMyCardList();
         }

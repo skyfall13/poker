@@ -43,10 +43,11 @@ public class Hand {
     }
 
     public void showMyCardList(){
+        int i = 1;
         Iterator<Card> tempCardList = cardList.iterator();
         while (tempCardList.hasNext()){
             Card tempCard = tempCardList.next();
-            System.out.print("[모양 : " + tempCard.getSuit() +" 숫자 : " + tempCard.getRank() + ']');
+            System.out.println(i++ +". [모양 : " + tempCard.getSuit() +" 숫자 : " + tempCard.getRank() + ']');
         }
         System.out.println();
     }
