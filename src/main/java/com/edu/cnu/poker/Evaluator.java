@@ -85,7 +85,7 @@ public class Evaluator {
         }
         if (triple)
             return tripleRule;
-        else {
+        if (!flush) {
             switch (pairCount) {
                 case 0:
                     break;
