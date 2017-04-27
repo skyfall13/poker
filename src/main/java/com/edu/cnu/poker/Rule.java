@@ -37,6 +37,9 @@ public class Rule {
         this.first = first;
     }
 
+    public Suit getSuit() {
+        return suit;
+    }
 
     public void setSecond(Suit suit) {
         this.suit = suit;
@@ -46,6 +49,9 @@ public class Rule {
     public void setSecond(int second) {
         this.second = second;
     }
+
+    public void setSuit(Suit suit) { this.suit = suit; }
+
 
     public int compareTo(Rule otherRule) {
         if (this.getPriority().compareTo(otherRule.getPriority()) > 0) {
@@ -64,7 +70,7 @@ public class Rule {
                 }
                 return -1;
             } else {
-                return 0;
+                return this.getSuit().compareTo(otherRule.getSuit());
             }
         }
     }
