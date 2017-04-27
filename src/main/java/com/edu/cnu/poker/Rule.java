@@ -47,4 +47,11 @@ public class Rule {
         this.second = second;
     }
 
+    public int compareTo(Rule otherRule) {
+        if (this.getPriority().compareTo(otherRule.getPriority()) > 0) {
+            return 1;
+        } else if (this.getPriority().compareTo(otherRule.getPriority()) < 0) {
+            return -1;
+        }else return 0;
+    }
 }
