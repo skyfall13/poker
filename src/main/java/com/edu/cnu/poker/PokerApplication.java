@@ -1,6 +1,6 @@
 package com.edu.cnu.poker;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by cse on 2017-04-17.
@@ -45,8 +45,58 @@ public class PokerApplication {
         System.out.println(myResult.getPriority());
         System.out.println(yourResult.getPriority());
 
-        if(!this.compareTo(myResult, yourResult)) {
-            // 모든 족보를 검사한 후, 남은 카드 TOP검사로 승리패배판단 미구현
+
+        if (!this.compareTo(myResult, yourResult)) {
+            Map<Integer, Integer> tempMap1 = new HashMap<Integer, Integer>();
+            Map<Integer, Integer> tempMap2 = new HashMap<Integer, Integer>();
+            List<Card> myCards = myHand.getMyCardList();
+            List<Card> yourCards = yourHand.getMyCardList();
+
+            for (Card card : myCards) {
+                if (tempMap1.containsKey(card.getRank())) {
+                    Integer count = tempMap1.get(card.getRank());
+                    count = new Integer(count.intValue() + 1);
+                    tempMap1.put(card.getRank(), count);
+                } else {
+                        tempMap1.put(card.getRank(), new Integer(1));
+                }
+            }
+            for (Card card : yourCards) {
+                if (tempMap2.containsKey(card.getRank())) {
+                    Integer count = tempMap2.get(card.getRank());
+                    count = new Integer(count.intValue() + 1);
+                    tempMap2.put(card.getRank(), count);
+                } else {
+                    tempMap2.put(card.getRank(), new Integer(1));
+                }
+            }
+            int myTop = 0;
+            Suit myTopSuit = null;
+            int yourTop = 0;
+            Suit yourTopSuit = null;
+
+            for(Card card : myCards) {
+                if(tempMap1.get(card.getRank()) == 1 && card.getRank() > myTop) {
+                    myTop = card.getRank();
+                    myTopSuit = card.getSuit();
+                }
+            }
+            for(Card card : yourCards) {
+                if(tempMap2.get(card.getRank()) == 1 && card.getRank() > yourTop) {
+                    yourTop = card.getRank();
+                    yourTopSuit = card.getSuit();
+                }
+            }
+            if(myTop > yourTop)
+                System.out.println(myTopSuit+" "+myTop + " Top 승리!");
+            else if(myTop < yourTop)
+                System.out.println(myTopSuit+" "+myTop + " Top 패배");
+            else{
+                if(myTopSuit.ordinal() > yourTopSuit.ordinal())
+                    System.out.println(myTopSuit+" "+myTop + " Top 승리!");
+                else if(myTopSuit.ordinal() < yourTopSuit.ordinal())
+                    System.out.println(myTopSuit+" "+myTop + " Top 패배");
+            }
         }
     }
 

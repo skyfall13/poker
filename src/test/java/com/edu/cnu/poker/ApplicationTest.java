@@ -39,31 +39,31 @@ public class ApplicationTest {
         boolean result = app.compareTo(myRule,yourRule);
         assertThat(result, is(true));
     }
-//    @Test
-//    public void getSecond를비교() {
-//        Evaluator evaluator1 = new Evaluator();
-//        Evaluator evaluator2 = new Evaluator();
-//        List<Card> cardList1 = Arrays.asList(
-//                new Card(1,Suit.CLUBS),
-//                new Card(1,Suit.DIAMONDS),
-//                new Card(2,Suit.DIAMONDS),
-//                new Card(7,Suit.HEARTS),
-//                new Card(7,Suit.SPADES)
-//        );
-//        List<Card> cardList2 = Arrays.asList(
-//                new Card(1,Suit.HEARTS),
-//                new Card(1,Suit.SPADES),
-//                new Card(2,Suit.HEARTS),
-//                new Card(7,Suit.DIAMONDS),
-//                new Card(7,Suit.CLUBS)
-//        );
-//        Rule myRule = evaluator1.evaluate(cardList1);
-//        Rule yourRule = evaluator2.evaluate(cardList2);
-//        int result = myRule.compareTo(yourRule);
-//        System.out.println(result);
-//        assertTrue( result< 0 );
-//
-//    }
+    @Test
+    public void getSecond를비교() {
+        PokerApplication app = new PokerApplication();
+        Evaluator evaluator1 = new Evaluator();
+        Evaluator evaluator2 = new Evaluator();
+        List<Card> cardList1 = Arrays.asList(
+                new Card(1,Suit.CLUBS),
+                new Card(1,Suit.DIAMONDS),
+                new Card(2,Suit.DIAMONDS),
+                new Card(7,Suit.HEARTS),
+                new Card(7,Suit.SPADES)
+        );
+        List<Card> cardList2 = Arrays.asList(
+                new Card(1,Suit.HEARTS),
+                new Card(1,Suit.SPADES),
+                new Card(2,Suit.HEARTS),
+                new Card(7,Suit.DIAMONDS),
+                new Card(7,Suit.CLUBS)
+        );
+        Rule myRule = evaluator1.evaluate(cardList1);
+        Rule yourRule = evaluator2.evaluate(cardList2);
+        boolean result = app.compareTo(myRule,yourRule);
+        assertThat(result, is(false));
+
+    }
 
     @Test
     public void 스티플을_비교() {
