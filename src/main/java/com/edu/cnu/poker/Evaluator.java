@@ -9,25 +9,24 @@ import java.util.Map;
  * Created by cse on 2017-04-17.
  */
 public class Evaluator {
-    public String evaluate(List<Card> cardList) {
 
-        boolean flush_flag=false;
-        Map<Suit, Integer> tempMap = new HashMap<Suit, Integer>();
+    Rule onePairRule;
+    Rule twoPairRule;
+    Rule tripleRule;
+    Rule flushRule;
+
+    public Rule evaluate(List<Card> cardList) {
+
+        Map<Suit, Integer> tempMap1 = new HashMap<Suit, Integer>();
         Map<Integer, Integer> tempMap2 = new HashMap<Integer, Integer>();
 
         for (Card card : cardList) {
-            if (tempMap.containsKey(card.getSuit())) {
-                Integer count = tempMap.get(card.getSuit());
+            if (tempMap1.containsKey(card.getSuit())) {
+                Integer count = tempMap1.get(card.getSuit());
                 count = new Integer(count.intValue() + 1);
-                tempMap.put(card.getSuit(), count);
+                tempMap1.put(card.getSuit(), count);
             } else {
-                tempMap.put(card.getSuit(), new Integer(1));
-            }
-        }
-
-        for (Suit key : tempMap.keySet()) {
-            if (tempMap.get(key) == 5) {
-                flush_flag = true;
+                tempMap1.put(card.getSuit(), new Integer(1));
             }
         }
         for (Card card : cardList) {
@@ -35,44 +34,114 @@ public class Evaluator {
                 Integer count = tempMap2.get(card.getRank());
                 count = new Integer(count.intValue() + 1);
                 tempMap2.put(card.getRank(), count);
-
-            }else {
+            } else {
                 tempMap2.put(card.getRank(), new Integer(1));
             }
         }
-        for (Integer key : tempMap2.keySet()) {
+        boolean flush = false;
+        for (Suit key : tempMap1.keySet()) {
+            if (tempMap1.get(key) == 5) {
+                flushRule = new Rule(EnumRule.FLUSH, key);
+                flush = true;
+            }
+        }
+        boolean triple = false;
+        for (int key : tempMap2.keySet()) {
+            if (tempMap2.get(key) == 3) {
+                if(key == 1)
+                    key = 14;
+                tripleRule = new Rule(EnumRule.TRIPLE, key);
+                triple = true;
+            }
+        }
+        for (int key : tempMap2.keySet()){
+            System.out.println(tempMap2.get(key));
+        }
+        int pairCount = 0;
+        for (int key : tempMap2.keySet()) {
             if (tempMap2.get(key) == 4) {
-                return "FOUR_CARD";
-            }else if (tempMap2.get(key) == 2) {
-                tempMap2.remove(key);
-                for (Integer key2 : tempMap2.keySet()){
-                    if(tempMap2.get(key2) == 2){
-                        return "TWO_PAIR";
-                    }else if(tempMap2.get(key2) == 3){
-                        return "FULL_HOUSE";
-                    }else return "ONE_PAIR";
+                if(key == 1)
+                    key = 14;
+                Rule fourCardRule = new Rule(EnumRule.FOUR_CARD, key);
+                return fourCardRule;
+            }
+
+            if (tempMap2.get(key) == 2) {
+                if(key == 1)
+                    key = 14;
+                switch (pairCount) {
+                    case 0:
+                        onePairRule = new Rule(EnumRule.ONE_PAIR, key);
+                        twoPairRule = new Rule(EnumRule.TWO_PAIR, key);
+                        break;
+                    case 1:
+                        if (twoPairRule.getFirst() < key) {
+                            twoPairRule.setSecond(twoPairRule.getFirst());
+                            twoPairRule.setFirst(key);
+                            break;
+                        } else
+                            twoPairRule.setSecond(key);
+                        break;
                 }
-            }else if (tempMap2.get(key) == 3) {
-                return "TRIPLE";
+                if (triple) {
+                    Rule fullHouseRule = new Rule(EnumRule.FULL_HOUSE, tripleRule.getFirst());
+                    fullHouseRule.setSecond(key);
+                    return fullHouseRule;
+                }
+                pairCount++;
+            }
+        }
+        if (triple)
+            return tripleRule;
+        if (!flush) {
+            switch (pairCount) {
+                case 0:
+                    break;
+                case 1:
+                    return onePairRule;
+                case 2:
+                    return twoPairRule;
             }
         }
 
         Collections.sort(cardList);
-
-        for(int i = 0; i < cardList.size() ; i++ ) {
-            if(i == cardList.size() -1 ){
-                if(flush_flag){
-                    return "STRAIGHT_FLUSH";
-                }
-                return "STRAIGHT" ;
-            }
-            if(cardList.get(i).compareTo(cardList.get(i+1)) != -1 ){
+        boolean straight = false;
+        for (int i = 1; i < cardList.size(); i++) {
+            if (i == cardList.size() - 1) {
+                straight = true;
                 break;
             }
+            if (cardList.get(i).compareTo(cardList.get(i + 1)) != -1)
+                break;
         }
-        if(flush_flag){
-            return "FLUSH";
-        }
-        return "NOTHING";
+        if (cardList.get(0).getRank() == 1 && straight) {
+            if (cardList.get(1).getRank() == 2 && flush) {
+                Rule backStraightFlushRule = new Rule(EnumRule.BACK_STRAIGHT_FLUSH, cardList.get(0).getSuit());
+                return backStraightFlushRule;
+            } else if (cardList.get(1).getRank() == 2) {
+                Rule backStraightRule = new Rule(EnumRule.BACK_STRAIGHT, cardList.get(0).getSuit());
+                return backStraightRule;
+            } else if (cardList.get(cardList.size() - 1).getRank() == 13 && flush) {
+                Rule royalStraightRule = new Rule(EnumRule.ROYAL_STRAIGHT_FLUSH, cardList.get(0).getSuit());
+                return royalStraightRule;
+            } else if (cardList.get(cardList.size() - 1).getRank() == 13) {
+                Rule mountainRule = new Rule(EnumRule.MOUNTAIN, cardList.get(0).getSuit());
+                return mountainRule;
+            }
+        } else if (straight)
+            if (cardList.get(0).compareTo(cardList.get(1)) == -1 && flush) {
+                Rule straightFlushRule = new Rule(EnumRule.STRAIGHT_FLUSH, cardList.get(cardList.size() - 1).getRank());
+                straightFlushRule.setSecond(cardList.get(0).getSuit());
+                return straightFlushRule;
+            } else if (cardList.get(0).compareTo(cardList.get(1)) == -1) {
+                Rule straightRule = new Rule(EnumRule.STRAIGHT, cardList.get(cardList.size() - 1).getRank());
+                return straightRule;
+            }
+
+        if (flush)
+            return flushRule;
+
+        Rule nothingRule = new Rule(EnumRule.NOTHING);
+        return nothingRule;
     }
 }
