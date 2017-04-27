@@ -28,10 +28,6 @@ public class Rule {
         return this.priority;
     }
 
-    public Suit getSuit() {
-        return suit;
-    }
-
 
     public int getFirst() {
         return first;
@@ -41,17 +37,11 @@ public class Rule {
         this.first = first;
     }
 
-    public void setFirst(Suit suit) {
-        this.suit = suit;
-    }
 
     public void setSecond(Suit suit) {
         this.suit = suit;
     }
 
-    public int getSecond() {
-        return second;
-    }
 
     public void setSecond(int second) {
         this.second = second;

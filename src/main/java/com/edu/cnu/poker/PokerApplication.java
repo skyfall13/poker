@@ -16,22 +16,22 @@ public class PokerApplication {
     public static void main(String[] args) {
         System.out.println("Hello Poker");
         Deck currentDeck = new Deck(1);
-        Hand myHand = new Hand(currentDeck,PokerType.SEVEN);
-        Hand yourHand = new Hand(currentDeck,PokerType.FIVE);
+        Hand myHand = new Hand(currentDeck, PokerType.SEVEN);
+        Hand yourHand = new Hand(currentDeck, PokerType.FIVE);
 
         Player player1 = new Player(myHand);
         Player player2 = new Player(yourHand);
 
         player1.getHand().showMyCardList();
         Scanner scan = new Scanner(System.in);
-        while(true){
+        while (true) {
             System.out.println("버리고 싶은 카드를 입력해주세요 (앞에서 부터 1번카드)");
             int input = scan.nextInt();
             try {
                 if (!player1.getHand().removeCard(input)) {
                     break;
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 continue;
             }
             player1.getHand().showMyCardList();

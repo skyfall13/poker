@@ -22,7 +22,6 @@ public class Deck {
     }
 
     private void createCard(int numberOfDeck) {
-        // card 생성해보자
         for (int j = 0; j < numberOfDeck; j++) {
             for (Suit suit : Suit.values()) {
                 for (int i = 1; i < 14; i++) {

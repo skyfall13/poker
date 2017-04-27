@@ -26,8 +26,4 @@ public enum EnumRule {
         this.priority = priority;
     }
 
-    public int getPriority(){
-        return this.priority;
-    }
-
 }

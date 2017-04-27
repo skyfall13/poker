@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class EvaluatorTest {
     @Test
-    public void SUIT가_5개가동일하면_플러쉬다() {
+    public void SUIT가_5개가동일하면_플러시다() {
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(1,Suit.CLUBS),
@@ -70,10 +70,10 @@ public class EvaluatorTest {
         Evaluator evaluator = new Evaluator();
         List<Card> cardList = Arrays.asList(
                 new Card(2,Suit.CLUBS),
-                new Card(7,Suit.HEARTS),
+                new Card(1,Suit.HEARTS),
                 new Card(13,Suit.DIAMONDS),
-                new Card(7,Suit.DIAMONDS),
-                new Card(7,Suit.SPADES)
+                new Card(1,Suit.DIAMONDS),
+                new Card(1,Suit.SPADES)
         );
         Rule result = evaluator.evaluate(cardList);
         assertThat(result.getPriority(), is(EnumRule.TRIPLE));

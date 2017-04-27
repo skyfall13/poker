@@ -9,7 +9,7 @@ public class Player {
     private static int level;
     private boolean life;
 
-    Player(Hand hand){
+    Player(Hand hand) {
         this.hand = hand;
     }
 

@@ -23,11 +23,11 @@ public class Hand {
         }
     }
 
-    public boolean removeCard(int num){
-        if(removeCount != 0) {
+    public boolean removeCard(int num) {
+        if (removeCount != 0) {
             cardList.remove(num - 1);
             removeCount--;
-            if(removeCount == 0)
+            if (removeCount == 0)
                 return false;
             return true;
         }
@@ -38,16 +38,16 @@ public class Hand {
         return cardList.size();
     }
 
-    public List<Card> getMyCardList(){
+    public List<Card> getMyCardList() {
         return this.cardList;
     }
 
-    public void showMyCardList(){
+    public void showMyCardList() {
         int i = 1;
         Iterator<Card> tempCardList = cardList.iterator();
-        while (tempCardList.hasNext()){
+        while (tempCardList.hasNext()) {
             Card tempCard = tempCardList.next();
-            System.out.println(i++ +". [모양 : " + tempCard.getSuit() +" 숫자 : " + tempCard.getRank() + ']');
+            System.out.println(i++ + ". [모양 : " + tempCard.getSuit() + " 숫자 : " + tempCard.getRank() + ']');
         }
         System.out.println();
     }
