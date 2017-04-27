@@ -52,6 +52,20 @@ public class Rule {
             return 1;
         } else if (this.getPriority().compareTo(otherRule.getPriority()) < 0) {
             return -1;
-        }else return 0;
+        }else {     // 족보가 같을 때
+            if (this.getFirst() - otherRule.getFirst() > 0) {
+                if (otherRule.getFirst() == 1) {
+                    return -1;
+                }
+                return 1;
+            } else if (this.getFirst() - otherRule.getFirst() < 0) {
+                if (this.getFirst() == 1) {
+                    return 1;
+                }
+                return -1;
+            } else {
+                return 0;
+            }
+        }
     }
 }
