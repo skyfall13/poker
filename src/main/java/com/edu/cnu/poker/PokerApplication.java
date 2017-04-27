@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class PokerApplication {
 
-    public static void main(String[] args) {
+    public void run() {
         System.out.println("Hello Poker");
         Deck currentDeck = new Deck(1);
         Hand myHand = new Hand(currentDeck, PokerType.SEVEN);
@@ -45,6 +45,43 @@ public class PokerApplication {
         System.out.println(myResult.getPriority());
         System.out.println(yourResult.getPriority());
 
+        if(!this.compareTo(myResult, yourResult)) {
+            
+        }
+    }
+
+    public boolean compareTo(Rule thisRule, Rule otherRule) {
+        if (thisRule.getPriorityNum() > otherRule.getPriorityNum()) {
+            System.out.println(thisRule.getFirst() + " " + thisRule.getPriority() + " 승리!");
+            return true;
+        } else if (thisRule.getPriorityNum() < otherRule.getPriorityNum()) {
+            System.out.println(thisRule.getPriority() + " 패배!");
+            return true;
+        } else {
+            if (thisRule.getFirst() - otherRule.getFirst() > 0) {
+                System.out.println(thisRule.getFirst() + " " + thisRule.getPriority() + " 승리!");
+                return true;
+            } else if (thisRule.getFirst() - otherRule.getFirst() < 0) {
+                System.out.println(thisRule.getPriority() + " 패배!");
+                return true;
+            } else {
+                if (thisRule.getSecond() - otherRule.getSecond() > 0) {
+                    System.out.println(thisRule.getFirst() + " " + thisRule.getPriority() + " 승리!");
+                    return true;
+                } else if (thisRule.getSecond() - otherRule.getSecond() < 0) {
+                    System.out.println(thisRule.getPriority() + " 패배!");
+                    return true;
+                } else if (thisRule.getSuit() == null)
+                    return false;
+                else if (thisRule.getSuit().ordinal() > otherRule.getSuit().ordinal()) {
+                    System.out.println(thisRule.getSuit() + " " + thisRule.getPriority() + " 승리!");
+                    return true;
+                } else {
+                    System.out.println(thisRule.getPriority() + " 패배!");
+                    return true;
+                }
+            }
+        }
     }
 
 }
