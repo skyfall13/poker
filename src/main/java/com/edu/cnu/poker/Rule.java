@@ -41,6 +41,10 @@ public class Rule {
         return suit;
     }
 
+    public int getSecond() {
+        return second;
+    }
+
     public void setSecond(Suit suit) {
         this.suit = suit;
     }
@@ -70,7 +74,13 @@ public class Rule {
                 }
                 return -1;
             } else {
-                return this.getSuit().compareTo(otherRule.getSuit());
+                if (this.getSecond() - otherRule.getSecond() > 0) {
+                    return 1;
+                } else if (this.getSecond() - otherRule.getSecond() < 0) {
+                    return -1;
+                } else {
+                    return this.getSuit().compareTo(otherRule.getSuit());
+                }
             }
         }
     }
